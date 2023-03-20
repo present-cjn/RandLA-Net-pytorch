@@ -66,3 +66,27 @@ traffic-sign:  36.05
 There are some differences with the results in the paper, but we think the overall results is acceptable. 
 
 The checkpoint is in the output folder.
+
+# 项目介绍
+这是一个RandLA-Net的pytorch版项目，目前训练的数据为Semantic KITTI
+## 准备工作
+安装依赖项
+```python
+pip install -r requirements.txt
+```
+该项目还用了一些C程序，需要编译后使用
+```sheel
+sh compile_op.sh
+```
+下载semantickitti数据集，并对数据进行预处理
+
+```python
+python utils/data_prepare_semantickitti.py
+```
+记得修改下面data_prepare_semantickitti.py文件中的{dataset_path}和{output_path}
+
+## 训练模型
+```python
+python main_SemanticKITTI.py
+```
+注意修改semantic_kitti_dataset.py中的{self.dataset_path}
