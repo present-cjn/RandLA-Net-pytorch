@@ -146,7 +146,7 @@ class IoUCalculator:
         val_total_correct += correct
         val_total_seen += len(labels_valid)
 
-        conf_matrix = confusion_matrix(labels_valid, pred_valid, np.arange(0, self.cfg.num_classes, 1))
+        conf_matrix = confusion_matrix(labels_valid, pred_valid, labels=np.arange(0, self.cfg.num_classes, 1))
         self.gt_classes += np.sum(conf_matrix, axis=1)
         self.positive_classes += np.sum(conf_matrix, axis=0)
         self.true_positive_classes += np.diagonal(conf_matrix)
@@ -278,7 +278,8 @@ def get_loss(logits, labels, pre_cal_weights):
     class_weights = torch.from_numpy(pre_cal_weights).float().cuda()
     # one_hot_labels = F.one_hot(labels, self.config.num_classes)
 
-    criterion = nn.CrossEntropyLoss(weight=class_weights, reduction='none')
+    # criterion = nn.CrossEntropyLoss(weight=class_weights, reduction='none')
+    criterion = nn.CrossEntropyLoss(reduction='none')
     output_loss = criterion(logits, labels)
     output_loss = output_loss.mean()
     return output_loss

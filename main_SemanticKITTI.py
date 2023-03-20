@@ -14,8 +14,8 @@ from datetime import datetime
 parser = argparse.ArgumentParser()
 parser.add_argument('--checkpoint_path', default='output/checkpoint.tar', help='Model checkpoint path [default: None]')
 parser.add_argument('--log_dir', default='output', help='Dump dir to save model checkpoint [default: log]')
-parser.add_argument('--max_epoch', type=int, default=400, help='Epoch to run [default: 180]')
-parser.add_argument('--batch_size', type=int, default=20, help='Batch Size during training [default: 8]')
+parser.add_argument('--max_epoch', type=int, default=180, help='Epoch to run [default: 180]')
+parser.add_argument('--batch_size', type=int, default=8, help='Batch Size during training [default: 8]')
 FLAGS = parser.parse_args()
 
 #################################################   log   #################################################
@@ -39,8 +39,8 @@ def my_worker_init_fn(worker_id):
 TRAIN_DATASET = SemanticKITTI('training')
 TEST_DATASET = SemanticKITTI('validation')
 print(len(TRAIN_DATASET), len(TEST_DATASET))
-TRAIN_DATALOADER = DataLoader(TRAIN_DATASET, batch_size=FLAGS.batch_size, shuffle=True, num_workers=20, worker_init_fn=my_worker_init_fn, collate_fn=TRAIN_DATASET.collate_fn)
-TEST_DATALOADER = DataLoader(TEST_DATASET, batch_size=FLAGS.batch_size, shuffle=True, num_workers=20, worker_init_fn=my_worker_init_fn, collate_fn=TEST_DATASET.collate_fn)
+TRAIN_DATALOADER = DataLoader(TRAIN_DATASET, batch_size=FLAGS.batch_size, shuffle=True, num_workers=1, worker_init_fn=my_worker_init_fn, collate_fn=TRAIN_DATASET.collate_fn)
+TEST_DATALOADER = DataLoader(TEST_DATASET, batch_size=FLAGS.batch_size, shuffle=True, num_workers=1, worker_init_fn=my_worker_init_fn, collate_fn=TEST_DATASET.collate_fn)
 
 print(len(TRAIN_DATALOADER), len(TEST_DATALOADER))
 
