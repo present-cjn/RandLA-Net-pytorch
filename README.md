@@ -74,10 +74,14 @@ The checkpoint is in the output folder.
 ```python
 pip install -r requirements.txt
 ```
+安装pytorch
+去官网https://pytorch.org/，用对应版本的指令安装
+
 该项目还用了一些C程序，需要编译后使用
 ```sheel
 sh compile_op.sh
 ```
+编译结束后运行下面的命令可能会出现找不到nearest_neighbors，此时需要将{utils/nearest_neighbors/lib/python/KNN_NanoFLANN-0.0.0-py3.8-linux-x86_64.egg}下面的.so文件移到外面一层（windows下为.pyd文件）
 下载semantickitti数据集，并对数据进行预处理
 
 ```python
